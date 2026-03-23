@@ -17,6 +17,7 @@ const styles = {
 
 export default function InfoPanel() {
   const [info, setInfo] = useState(null) 
+  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
     setInfo({
@@ -26,10 +27,25 @@ export default function InfoPanel() {
     })
   }, [])
 
-  if (!info) return null
+  if (!info || !visible) return null
 
   return (
     <div style={styles}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+        <span style={{ fontWeight: 600, color: '#cba6f7' }}>Инфо о странице</span>
+        <button
+          onClick={() => setVisible(false)}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: '#6c7086',
+            fontSize: '16px',
+            cursor: 'pointer',
+            lineHeight: 1,
+            padding: '0 2px',
+          }}
+        >X</button>
+      </div>
       <p><strong>Заголовок:</strong> {info.title}</p>
       <p><strong>Язык:</strong> {info.language}</p>
       <p><strong>Слов на странице:</strong> {info.wordCount}</p>

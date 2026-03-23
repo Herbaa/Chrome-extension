@@ -1,9 +1,25 @@
 import React, { useState, useEffect } from 'react'
 
+const style = {
+  position: 'fixed',
+  bottom: '20px',
+  right: '20px',
+  width: '300px',
+  background: '#1e1e2e',
+  color: '#cdd6f4',
+  borderRadius: '10px',
+  padding: '14px',
+  zIndex: 999999,
+  fontFamily: 'Segoe UI, sans-serif',
+  fontSize: '14px',
+  boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+}
+
 export default function Translator() {
   const [inputText, setInputText] = useState('')
   const [translatedText, setTranslatedText] = useState('')
   const [loading, setLoading] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
     const selected = window.getSelection().toString().trim() // выделенный текст
@@ -27,23 +43,25 @@ export default function Translator() {
       setLoading(false)
     }
   }
+  if (!visible) return null
 
   return (
-    <div style={{
-      position: 'fixed',
-      bottom: '20px',
-      right: '20px',
-      width: '300px',
-      background: '#1e1e2e',
-      color: '#cdd6f4',
-      borderRadius: '10px',
-      padding: '14px',
-      zIndex: 999999,
-      fontFamily: 'Segoe UI, sans-serif',
-      fontSize: '14px',
-      boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
-    }}>
-      <p style={{ marginBottom: '8px', fontWeight: 600, color: '#cba6f7' }}>Переводчик</p>
+    <div style={style}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+        <span style={{fontWeight: 600, color: '#cba6f7' }}>Переводчик</span>
+        <button
+          onClick={() => setVisible(false)}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: '#6c7086',
+            fontSize: '16px',
+            cursor: 'pointer',
+            lineHeight: 1,
+            padding: '0 2px',
+          }}
+        >X</button>
+      </div>
 
       <textarea
         value={inputText}

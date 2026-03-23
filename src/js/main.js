@@ -20,7 +20,6 @@ function injectComponent(id, component) {
   const existing = document.getElementById(id)
   if (existing) {
     existing.remove()
-    return
   }
 
   const div = document.createElement('div');
