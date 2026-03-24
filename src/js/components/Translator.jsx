@@ -20,6 +20,7 @@ export default function Translator() {
   const [translatedText, setTranslatedText] = useState('')
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(true)
+  const [direction, setDirection] = useState('en|ru')
 
   useEffect(() => {
     const selected = window.getSelection().toString().trim() // выделенный текст
@@ -33,7 +34,7 @@ export default function Translator() {
     setTranslatedText('')
 
     try {
-      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(inputText)}&langpair=en|ru`
+      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(inputText)}&langpair=${direction}`
       const res = await fetch(url)
       const data = await res.json()
       setTranslatedText(data.responseData.translatedText)
@@ -61,6 +62,36 @@ export default function Translator() {
             padding: '0 2px',
           }}
         >X</button>
+      </div>
+
+          <div style={{ display: 'flex', marginBottom: '8px', borderRadius: '6px', overflow: 'hidden' }}>
+        <button
+          onClick={() => { setDirection('en|ru'); setTranslatedText('') }}
+          style={{
+            flex: 1,
+            padding: '6px',
+            border: 'none',
+            cursor: 'pointer',
+            fontSize: '12px',
+            fontWeight: 600,
+            background: direction === 'en|ru' ? '#cba6f7' : '#313244',
+            color: direction === 'en|ru' ? '#1e1e2e' : '#cdd6f4',
+          }}
+        >EN -> RU</button>
+        
+        <button
+          onClick={() => { setDirection('ru|en'); setTranslatedText('') }}
+          style={{
+            flex: 1,
+            padding: '6px',
+            border: 'none',
+            cursor: 'pointer',
+            fontSize: '12px',
+            fontWeight: 600,
+            background: direction === 'ru|en' ? '#cba6f7' : '#313244',
+            color: direction === 'ru|en' ? '#1e1e2e' : '#cdd6f4',
+          }}
+        >RU -> EN</button>
       </div>
 
       <textarea
