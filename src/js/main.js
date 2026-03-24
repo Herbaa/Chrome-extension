@@ -13,6 +13,14 @@ chrome.runtime.onMessage.addListener((request, sender, response) => {
     injectComponent('page-tools-translator', <Translator />)
     response({ success: true });
   }
+    
+  if (request.action === 'closeAll') {
+    ['page-tools-info', 'page-tools-translator'].forEach(id => {
+      const el = document.getElementById(id)
+      if (el) el.remove()
+    })
+    response({ success: true })
+  }
 
 })
 
