@@ -25,7 +25,21 @@ export default function Translator() {
   useEffect(() => {
     const selected = window.getSelection().toString().trim() // выделенный текст
     if (selected) setInputText(selected)
-  }, [])
+
+    function handleSelection() {
+      const select = window.getSelection().toString().trim()
+      if (select) {
+        setInputText(select)
+        setTranslatedText('')
+      }
+    }
+
+    document.addEventListener('mouseup', handleSelection)
+
+    return () => {
+      document.removeEventListener('mouseup', handleSelection)
+    }
+}, [])
 
   async function handleTranslate() {
     if (!inputText.trim()) return
@@ -77,7 +91,7 @@ export default function Translator() {
             background: direction === 'en|ru' ? '#cba6f7' : '#313244',
             color: direction === 'en|ru' ? '#1e1e2e' : '#cdd6f4',
           }}
-        >EN -> RU</button>
+        >EN -&gt; RU</button>
         
         <button
           onClick={() => { setDirection('ru|en'); setTranslatedText('') }}
@@ -91,7 +105,7 @@ export default function Translator() {
             background: direction === 'ru|en' ? '#cba6f7' : '#313244',
             color: direction === 'ru|en' ? '#1e1e2e' : '#cdd6f4',
           }}
-        >RU -> EN</button>
+        >RU -&gt; EN</button>
       </div>
 
       <textarea
