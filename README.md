@@ -15,6 +15,9 @@ Page Tools - это расширение для Google Chrome, которое д
 * Переводчик: перевод текста EN -> RU и RU -> EN
 * Закрытие всех панелей одной кнопкой в popup
 
+### Демонстрация работы (gif)
+![chrome_Ajwqo7uclA](https://github.com/user-attachments/assets/0e18137e-f2c6-4964-b811-f3cb5b011157)
+
 ## Запуск локально
 
 1. Склонировать репозиторий
